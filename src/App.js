@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navigator from "../src/components/navigator.jsx";
+import Header from "./components/header.jsx";
+import { SLIDER_IMAGES } from "./data.js";
+import SliderContainer from "./components/sliderContent.jsx";
+import CatlogueItems from "./components/UI/catlogueItems.jsx";
+import RadiusComp from "./components/radiusComp.jsx";
+import { MenuContextProvider } from "./store/ContextApi.jsx";
+import MenuDropdown from "./components/menuDropdown.jsx";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MenuContextProvider>
+        <Navigator />
+        <MenuDropdown />
+        <Header />
+        <RadiusComp className="relative z-10 mb-[-40px]" />
+        <SliderContainer>
+          {SLIDER_IMAGES.map((item) => (
+            <li key={item.id}>
+              <CatlogueItems {...item} />
+            </li>
+          ))}
+        </SliderContainer>
+        <RadiusComp className="relative z-10 mt-[-45px] " />
+      </MenuContextProvider>
+    </>
   );
 }
 
